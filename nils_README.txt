@@ -1,0 +1,1 @@
+Confirmation de ma participation au groupe 04.
