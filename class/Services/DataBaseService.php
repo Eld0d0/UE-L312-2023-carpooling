@@ -11,8 +11,8 @@ class DataBaseService
     const HOST = '127.0.0.1';
     const PORT = '3306';
     const DATABASE_NAME = 'carpooling';
-    const MYSQL_USER = 'root';
-    const MYSQL_PASSWORD = 'password';
+    const MYSQL_USER = 'carpooling';
+    const MYSQL_PASSWORD = 'jesuisunmotdepassepasfiable';
 
     private $connection;
 
@@ -99,6 +99,83 @@ class DataBaseService
             'id' => $id,
         ];
         $sql = 'DELETE FROM users WHERE id = :id;';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+
+
+
+    /**
+     * Create a car.
+     */
+    public function createCar(string $carmodel, string $color, string $capacity, string $driver): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'carmodel' => $carmodel,
+            'color' => $color,
+            'capacity' => $capacity,
+            'driver' => $driver,
+        ];
+        $sql = 'INSERT INTO cars (carmodel, color, capacity, driver) VALUES (:carmodel, :color, :capacity, :driver)';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+
+    /**
+     * Return all cars.
+     */
+    public function getCars(): array
+    {
+        $cars = [];
+
+        $sql = 'SELECT * FROM cars';
+        $query = $this->connection->query($sql);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($results)) {
+            $cars = $results;
+        }
+
+        return $cars;
+    }
+
+    /**
+     * Update a car.
+     */
+    public function updateCar(string $id, string $carmodel, string $color, string $capacity, string $driver): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'id' => $id,
+            'carmodel' => $carmodel,
+            'color' => $color,
+            'capacity' => $capacity,
+            'driver' => $driver,
+        ];
+        $sql = 'UPDATE cars SET carmodel = :carmodel, color = :color, capacity = :capacity, driver = :driver WHERE id = :id;';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+
+    /**
+     * Delete a car.
+     */
+    public function deleteCar(string $id): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'id' => $id,
+        ];
+        $sql = 'DELETE FROM cars WHERE id = :id;';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
 
