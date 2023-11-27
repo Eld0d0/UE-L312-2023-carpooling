@@ -4,7 +4,7 @@ namespace App\Entities;
 
 use DateTime;
 
-class Reservation
+class Advert
 {
     private $id;
     private $id_driver;
