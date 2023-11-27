@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Services\AddsService;
+use DateTime;
 
 class AddsController
 {
@@ -21,16 +22,17 @@ class AddsController
             isset($_POST['tripArrivalCity'])) {
             // Create the add :
             $addsService = new AddsService();
+            $tripDateAndTime = new DateTime($_POST['tripDateAndTime']);
             $isOk = $addsService->setAdd(
                 null,
                 $_POST['driverId'],
                 $_POST['carId'],
-                strtotime($_POST['tripDateAndTime']),
+                $tripDateAndTime,
                 $_POST['tripDepartureCity'],
                 $_POST['tripArrivalCity']
             );
             if ($isOk) {
-                $html = 'L\'annonce a été créée avec succès.';
+                $html = 'L\'annonce a été créé avec succès.';
             } else {
                 $html = 'Erreur lors de la création de l\'annonce.';
             }
