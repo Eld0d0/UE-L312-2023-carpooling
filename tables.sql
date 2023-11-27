@@ -25,3 +25,16 @@ INSERT INTO `cars` (`id`, `carmodel`, `color`, `capacity`, `driver`) VALUES
 (1, 'Fiat Multipla', 'Rouge', '3', 'Mark'),
 (2, 'Porsche cayen', 'Noir', '1', 'Cléa'),
 (3, 'Citroen picasso C4', 'Gris', '3', 'Théo');
+
+
+CREATE TABLE `bookings` (
+  `id` int AUTO_INCREMENT NOT NULL,
+  `addId` int NOT NULL,
+  `passengerId` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `bookings` (`id`, `addId`, `passengerId`) VALUES
+(1, 2, 3),
+(2, 3, 2),
+(3, 1, 1);

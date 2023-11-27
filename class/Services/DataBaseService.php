@@ -30,6 +30,10 @@ class DataBaseService
         }
     }
 
+    #####################################
+    ############## USERS ################
+    #####################################
+
     /**
      * Create an user.
      */
@@ -179,6 +183,81 @@ class DataBaseService
             'id' => $id,
         ];
         $sql = 'DELETE FROM cars WHERE id = :id;';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+
+    #####################################
+    ############ BOOKINGS ###############
+    #####################################
+     /**
+     * Create a booking.
+     */
+    public function createBooking(string $addId, string $passengerId): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'addId' => intval($addId),
+            'passengerId' => intval($passengerId),
+        ];
+        $sql = 'INSERT INTO bookings (addId, passengerId) VALUES (:addId, :passengerId)';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+
+    /**
+     * Return all bookings.
+     */
+    public function getBookings(): array
+    {
+        $bookings = [];
+
+        $sql = 'SELECT * FROM bookings';
+        $query = $this->connection->query($sql);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($results)) {
+            $bookings = $results;
+        }
+
+        return $bookings;
+    }
+
+    /**
+     * Update a booking.
+     */
+    public function updateBooking(string $id, string $addId, string $passengerId): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'id' => $id,
+            'addId' => intval($addId),
+            'passengerId' => intval($passengerId),
+        ];
+        $sql = 'UPDATE bookings SET addId = :addId, passengerId = :passengerId WHERE id = :id;';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+    
+    
+    /**
+     * Delete a booking.
+     */
+    public function deleteBooking(string $id): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'id' => intval($id),
+        ];
+        $sql = 'DELETE FROM bookings WHERE id = :id;';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
 
