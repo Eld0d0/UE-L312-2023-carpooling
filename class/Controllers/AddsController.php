@@ -83,11 +83,12 @@ class AddsController
             isset($_POST['tripArrivalCity'])) {
             // Update the add :
             $addsService = new AddsService();
+            $tripDateAndTime = new DateTime($_POST['tripDateAndTime']);
             $isOk = $addsService->setAdd(
                 $_POST['id'],
                 $_POST['driverId'],
                 $_POST['carId'],
-                strtotime($_POST['tripDateAndTime']),
+                $tripDateAndTime,
                 $_POST['tripDepartureCity'],
                 $_POST['tripArrivalCity']
             );
