@@ -104,4 +104,73 @@ class DataBaseService
 
         return $isOk;
     }
+
+/* Partie Annonce */
+
+public function createAdvert(string $id_driver, string $id_car, string $city_start, string $city_end, DateTime $date): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'iddriver' => $id_driver,
+            'idcar' => $id_car,
+            'citystart' => $city_start,
+            'cityend' => $city_end,
+            'date' => $date->format(DateTime::RFC3339),
+        ];
+        $sql = 'INSERT INTO adverts (iddriver, idcar, citystart, cityend, date) VALUES (:iddriver, :idcar, :citystart, :city_end, :date)';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+
+
+    public function getAdverts(): array
+    {
+        $adverts = [];
+
+        $sql = 'SELECT * FROM adverts';
+        $query = $this->connection->query($sql);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($results)) {
+            $adverts = $results;
+        }
+
+        return $adverts;
+    }
+
+    public function updateAdvert(string $id, string $id_driver, string $id_car, string $city_start, string $city_end, DateTime $date): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'id' => $id,
+            'iddriver' => $id_driver,
+            'idcar' => $id_car,
+            'citystart' => $city_start,
+            'cityend' => $city_end,
+            'date' => $date->format(DateTime::RFC3339),
+        ];
+        $sql = 'UPDATE adverts SET iddriver = :iddriver, idcar = :idcar, citystart = :citystart, cityend = :cityend, date = :date WHERE id = :id;';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+
+    public function deleteAdvert(string $id): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'id' => $id,
+        ];
+        $sql = 'DELETE FROM adverts WHERE id = :id;';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+
 }
