@@ -57,7 +57,7 @@ class AddsController
                 $add->getDriverId() . ' ' .
                 $add->getCarId() . ' ' .
                 $add->getTripDateAndTime()->format('d-m-Y') . ' '.
-                $add->getTripDateAndTime()->format('h-m') . ' '.
+                $add->getTripDateAndTime()->format('H:i:s') . ' '.
                 $add->getTripDepartureCity() . ' '.
                 $add->getTripArrivalCity() . '<br />';
         }

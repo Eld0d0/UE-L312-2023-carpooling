@@ -153,7 +153,7 @@ class DataBaseService
     */
     public function getAdds(): array
     {
-        $users = [];
+        $adds = [];
 
         $sql = 'SELECT * FROM adds';
         $query = $this->connection->query($sql);

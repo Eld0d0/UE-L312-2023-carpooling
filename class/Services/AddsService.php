@@ -43,7 +43,7 @@ class AddsService
                 $add->setTripArrivalCity($addDTO['tripArrivalCity']);
                 $tripDateAndTime = new DateTime($addDTO['tripDateAndTime']);
                 if ($tripDate !== false) {
-                    $add->tripDateAndTime($tripDateAndTime);
+                    $add->setTripDateAndTime($tripDateAndTime);
                 }
                 $adds[] = $add;
             }
