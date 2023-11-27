@@ -8,16 +8,16 @@ use DateTime;
 class AdvertsService
 {
 
-    public function setAdvert(?string $id, string $id_driver, string $id_car, string $city_start, string $city_end, string $date): bool
+    public function setAdvert(?string $id, string $id_driver, string $id_car, string $city_start, string $city_end, string $advert_date): bool
     {
         $isOk = false;
 
         $dataBaseService = new DataBaseService();
-        $DateDateTime = new DateTime($date);
+        $advertDateTime = new DateTime($advert_date);
         if (empty($id)) {
-            $isOk = $dataBaseService->createAdvert($id_driver, $id_car, $city_start, $city_end, $DateDateTime);
+            $isOk = $dataBaseService->createAdvert($id_driver, $id_car, $city_start, $city_end, $advertDateTime);
         } else {
-            $isOk = $dataBaseService->updateAdvert($id, $id_driver, $id_car, $city_start, $city_end, $DateDateTime);
+            $isOk = $dataBaseService->updateAdvert($id, $id_driver, $id_car, $city_start, $city_end, $advertDateTime);
         }
 
         return $isOk;
@@ -40,9 +40,9 @@ class AdvertsService
                 $advert->setIdCar($advertDTO['idcar']);
                 $advert->setCityStart($advertDTO['citystart']);
                 $advert->setCityEnd($advertDTO['cityend']);
-                $date = new DateTime($advertDTO['date']);
+                $date = new DateTime($advertDTO['advertdate']);
                 if ($date !== false) {
-                    $advert->setDate($date);
+                    $advert->setAdvertDate($date);
                 }
                 $adverts[] = $advert;
             }

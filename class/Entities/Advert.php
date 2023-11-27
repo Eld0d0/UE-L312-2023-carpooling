@@ -11,7 +11,7 @@ class Advert
     private $id_car;
     private $city_start;
     private $city_end;
-    private $date;
+    private $advert_date;
 
     public function getId(): string
     {
@@ -63,13 +63,13 @@ class Advert
         $this->city_end = $city_end;
     }
 
-    public function getDate(): DateTime
+    public function getAdvertDate(): DateTime
     {
-        return $this->date;
+        return $this->advert_date;
     }
 
-    public function setDate(DateTime $date): void
+    public function setAdvertDate(DateTime $advert_date): void
     {
-        $this->date = $date;
+        $this->advert_date = $advert_date;
     }
 }

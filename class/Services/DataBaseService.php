@@ -107,7 +107,7 @@ class DataBaseService
 
 /* Partie Annonce */
 
-public function createAdvert(string $id_driver, string $id_car, string $city_start, string $city_end, DateTime $date): bool
+public function createAdvert(string $id_driver, string $id_car, string $city_start, string $city_end, DateTime $advert_date): bool
     {
         $isOk = false;
 
@@ -116,9 +116,9 @@ public function createAdvert(string $id_driver, string $id_car, string $city_sta
             'idcar' => $id_car,
             'citystart' => $city_start,
             'cityend' => $city_end,
-            'date' => $date->format(DateTime::RFC3339),
+            'advertdate' => $advert_date->format(DateTime::RFC3339),
         ];
-        $sql = 'INSERT INTO adverts (iddriver, idcar, citystart, cityend, date) VALUES (:iddriver, :idcar, :citystart, :city_end, :date)';
+        $sql = 'INSERT INTO adverts (iddriver, idcar, citystart, cityend, advertdate) VALUES (:iddriver, :idcar, :citystart, :cityend, :advertdate)';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
 
@@ -140,7 +140,7 @@ public function createAdvert(string $id_driver, string $id_car, string $city_sta
         return $adverts;
     }
 
-    public function updateAdvert(string $id, string $id_driver, string $id_car, string $city_start, string $city_end, DateTime $date): bool
+    public function updateAdvert(string $id, string $id_driver, string $id_car, string $city_start, string $city_end, DateTime $advert_date): bool
     {
         $isOk = false;
 
@@ -150,9 +150,9 @@ public function createAdvert(string $id_driver, string $id_car, string $city_sta
             'idcar' => $id_car,
             'citystart' => $city_start,
             'cityend' => $city_end,
-            'date' => $date->format(DateTime::RFC3339),
+            'advertdate' => $advert_date->format(DateTime::RFC3339),
         ];
-        $sql = 'UPDATE adverts SET iddriver = :iddriver, idcar = :idcar, citystart = :citystart, cityend = :cityend, date = :date WHERE id = :id;';
+        $sql = 'UPDATE adverts SET iddriver = :iddriver, idcar = :idcar, citystart = :citystart, cityend = :cityend, advertdate = :advertdate WHERE id = :id;';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
 

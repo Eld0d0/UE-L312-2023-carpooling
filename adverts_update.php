@@ -25,8 +25,8 @@ echo $controller->updateAdvert();
     <label for="cityend">Ville d'arrivée' :</label>
     <input type="text" name="cityend">
     <br />
-    <label for="date">Date du trajet :</label>
-    <input type="text" name="date">
+    <label for="advertdate">Date du trajet :</label>
+    <input type="text" name="advertdate">
     <br />
     <input type="submit" value="Modifier l'annonce">
 </form>

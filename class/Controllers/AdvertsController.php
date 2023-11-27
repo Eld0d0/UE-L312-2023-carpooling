@@ -14,7 +14,7 @@ class AdvertsController
             isset($_POST['idcar']) &&
             isset($_POST['citystart']) &&
             isset($_POST['cityend']) &&
-            isset($_POST['date'])) {
+            isset($_POST['advertdate'])) {
                 
             $advertsService = new AdvertsService();
             $isOk = $advertsService->setAdvert(
@@ -23,7 +23,7 @@ class AdvertsController
                 $_POST['idcar'],
                 $_POST['citystart'],
                 $_POST['cityend'],
-                $_POST['date']
+                $_POST['advertdate']
             );
             if ($isOk) {
                 $html = 'Annonce créé avec succès.';
@@ -49,7 +49,7 @@ class AdvertsController
                 $advert->getIdCar() . ' ' .
                 $advert->getCityStart() . ' ' .
                 $advert->getCityEnd() . ' ' .
-                $advert->getDate()->format('d-m-Y') . '<br />';
+                $advert->getAdvertDate()->format('d-m-Y') . '<br />';
         }
 
         return $html;
@@ -64,7 +64,7 @@ class AdvertsController
             isset($_POST['idcar']) &&
             isset($_POST['citystart']) &&
             isset($_POST['cityend']) &&
-            isset($_POST['date'])) {
+            isset($_POST['advertdate'])) {
 
             $advertsService = new AdvertsService();
             $isOk = $advertsService->setAdvert(
@@ -73,7 +73,7 @@ class AdvertsController
                 $_POST['idcar'],
                 $_POST['citystart'],
                 $_POST['cityend'],
-                $_POST['date']
+                $_POST['advertdate']
             );
             if ($isOk) {
                 $html = 'Annonce mise à jour avec succès.';

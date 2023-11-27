@@ -22,8 +22,8 @@ echo $controller->createAdvert();
     <label for="cityend">Ville d'arrivée :</label>
     <input type="text" name="cityend">
     <br />
-    <label for="date">Date du trajet dd-mm-yyyy :</label>
-    <input type="text" name="date">
+    <label for="advertdate">Date du trajet dd-mm-yyyy :</label>
+    <input type="text" name="advertdate">
     <br />
     <input type="submit" value="Créer une annonce">
 </form>
