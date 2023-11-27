@@ -23,6 +23,6 @@ CREATE TABLE `adverts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `adverts` (`id`, `iddriver`, `idcar`, `citystart`, `cityend`, `date`) VALUES
-(1, '1', '2', 'Paris', 'Bordeaux', '2023-11-02'),
-(2, '3', '3', 'Marseille', 'Toulouse' '2023-12-05'),
-(3, '2', '1', 'Lyon', 'Strasbourg', '2023-12-11');
+(1, '1', '2', 'Paris', 'Bordeaux', '2023-11-27 11:33:50'),
+(2, '3', '3', 'Marseille', 'Toulouse', '2023-12-05 12:33:50'),
+(3, '2', '1', 'Lyon', 'Strasbourg', '2023-12-27 12:39:10');
