@@ -13,5 +13,5 @@ echo $controller->deleteBooking();
     <label for="id">Numéro de la réservation a supprimer <em>(Id de la réservation)</em> :</label>
     <input type="text" name="id">
     <br />
-    <input type="submit" value="Supprimer une reservation">
+    <input type="submit" value="Supprimer une réservation">
 </form>
