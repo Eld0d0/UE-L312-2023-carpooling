@@ -108,19 +108,18 @@ class DataBaseService
     /**
      * Create an add.
      */
-    public function createAdd(string $driverId, string $carId, DateTime $tripDate, DateTime $tripDepartureTime, string $tripDepartureCity, string $tripArrivalCity): bool
+    public function createAdd(string $driverId, string $carId, DateTime $tripDateAndTime, string $tripDepartureCity, string $tripArrivalCity): bool
     {
         $isOk = false;
 
         $data = [
-            'driverId' => $driverId,
-            'carId' => $carId,
-            'tripDate' => $tripDate->format(DateTime::RFC3339),
-            'tripDepartureTime' => $tripDepartureTime->format(DateTime::RFC3339),
+            'driverId' => intval($driverId),
+            'carId' => intval($carId),
+            'tripDateAndTime' => $tripDateAndTime->format(DateTime::RFC3339),
             'tripDepartureCity' => $tripDepartureCity,
             'tripArrivalCity' => $tripArrivalCity,
         ];
-        $sql = 'INSERT INTO adds (driverId, carId, tripDate, tripDepartureTime, tripDepartureCity, tripArrivalCity) VALUES (:driverId, :carId, :tripDate, :tripDepartureTime, :tripDepartureCity, :tripArrivalCity)';
+        $sql = 'INSERT INTO adds (driverId, carId, tripDateAndTime, tripDepartureCity, tripArrivalCity) VALUES (:driverId, :carId, :tripDateAndTime, :tripDepartureCity, :tripArrivalCity)';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
 
@@ -130,20 +129,19 @@ class DataBaseService
     /**
      * Update an add.
      */
-    public function updateAdd(string $id, string $driverId, string $carId, DateTime $tripDate, DateTime $tripDepartureTime, string $tripDepartureCity, string $tripArrivalCity): bool
+    public function updateAdd(string $id, string $driverId, string $carId, DateTime $tripDateAndTime, string $tripDepartureCity, string $tripArrivalCity): bool
     {
         $isOk = false;
 
         $data = [
             'id' => $id,
-            'driverId' => $driverId,
-            'carId' => $carId,
-            'tripDate' => $tripDate->format(DateTime::RFC3339),
-            'tripDepartureTime' => $tripDepartureTime->format(DateTime::RFC3339),
+            'driverId' => intval($driverId),
+            'carId' => intval($carId),
+            'tripDateAndTime' => $tripDateAndTime->format(DateTime::RFC3339),
             'tripDepartureCity' => $tripDepartureCity,
             'tripArrivalCity' => $tripArrivalCity,
         ];
-        $sql = 'UPDATE adds SET driverId = :driverId, carId = :carId, tripDate = :tripDate, tripDepartureTime = :tripDepartureTime, tripDepartureCity = :tripDepartureCity, tripArrivalCity = :tripArrivalCity WHERE id = :id;';
+        $sql = 'UPDATE adds SET driverId = :driverId, carId = :carId, tripDateAndTime = :tripDateAndTime, tripDepartureCity = :tripDepartureCity, tripArrivalCity = :tripArrivalCity WHERE id = :id;';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
 

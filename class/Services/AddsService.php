@@ -10,15 +10,15 @@ class AddsService
     /**
      * Create or update an add.
      */
-    public function setAdd(?string $id, string $driverId, string $carId, DateTime $tripDate, DateTime $tripDepartureTime, string $tripDepartureCity, string $tripArrivalCity): bool
+    public function setAdd(?string $id, string $driverId, string $carId, DateTime $tripDateAndTime, string $tripDepartureCity, string $tripArrivalCity): bool
     {
         $isOk = false;
 
         $dataBaseService = new DataBaseService();
         if (empty($id)) {
-            $isOk = $dataBaseService->createAdd($driverId, $carId, $tripDate, $tripDepartureTime, $tripDepartureCity, $tripArrivalCity);
+            $isOk = $dataBaseService->createAdd($driverId, $carId, $tripDateAndTime, $tripDepartureCity, $tripArrivalCity);
         } else {
-            $isOk = $dataBaseService->updateAdd($id, $driverId, $carId, $tripDate, $tripDepartureTime, $tripDepartureCity, $tripArrivalCity);
+            $isOk = $dataBaseService->updateAdd($id, $driverId, $carId, $tripDateAndTime, $tripDepartureCity, $tripArrivalCity);
         }
 
         return $isOk;
@@ -41,13 +41,9 @@ class AddsService
                 $add->setCarId($addDTO['carId']);
                 $add->setTripDepartureCity($addDTO['tripDepartureCity']);
                 $add->setTripArrivalCity($addDTO['tripArrivalCity']);
-                $tripDate = new DateTime($addDTO['tripDate']);
+                $tripDateAndTime = new DateTime($addDTO['tripDateAndTime']);
                 if ($tripDate !== false) {
-                    $add->setTripDate($tripDate);
-                }
-                $tripDepartureHour = new DateTime($addDTO['tripDepartureTime']);
-                if ($tripDepartureHour !== false) {
-                    $add->setTripDepartureTime($tripDepartureHour);
+                    $add->tripDateAndTime($tripDateAndTime);
                 }
                 $adds[] = $add;
             }

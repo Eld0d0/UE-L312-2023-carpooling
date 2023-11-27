@@ -9,8 +9,7 @@ class Add
     private $id;                    //Add identification number
     private $driverId;              //Driver identification number
     private $carId;                 //Car identification number
-    private $tripDate;              //Trip departure date
-    private $tripDepartureTime;     //Trip departure time
+    private $tripDateAndTime;       //Trip departure date and time
     private $tripDepartureCity;     //Trip departure city
     private $tripArrivalCity;       //Trip arrival city
 
@@ -51,25 +50,15 @@ class Add
 
     
     /* Trip departure date getter && setter*/
-    public function getTripDate(): DateTime
+    public function getTripDateAndTime(): DateTime
     {
-        return $this->tripDate;
+        return $this->tripDateAndTime;
     }
-    public function setTripDate(DateTime $tripDate): void
+    public function setTripDateAndTime(DateTime $tripDateAndTime): void
     {
-        $this->tripDate = $tripDate;
+        $this->tripDateAndTime = $tripDateAndTime;
     }
 
-   
-    /* Trip departure time getter && setter */
-    public function getTripDepartureTime(): DateTime
-    {
-        return $this->tripDepartureTime;
-    }
-    public function setTripDepartureTime(DateTime $tripDepartureTime): void
-    {
-        $this->tripDepartureTime = $tripDepartureTime;
-    }
 
     
     /* Trip departure city getter && setter */
