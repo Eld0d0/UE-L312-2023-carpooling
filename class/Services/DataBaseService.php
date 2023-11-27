@@ -11,8 +11,8 @@ class DataBaseService
     const HOST = '127.0.0.1';
     const PORT = '3306';
     const DATABASE_NAME = 'carpooling';
-    const MYSQL_USER = 'root';
-    const MYSQL_PASSWORD = 'password';
+    const MYSQL_USER = 'carpooling';
+    const MYSQL_PASSWORD = 'jesuisunmotdepassepasfiable';
 
     private $connection;
 
@@ -99,6 +99,85 @@ class DataBaseService
             'id' => $id,
         ];
         $sql = 'DELETE FROM users WHERE id = :id;';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+
+    /**
+     * Create an add.
+     */
+    public function createAdd(string $driverId, string $carId, DateTime $tripDate, DateTime $tripDepartureTime, string $tripDepartureCity, string $tripArrivalCity): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'driverId' => $driverId,
+            'carId' => $carId,
+            'tripDate' => $tripDate->format(DateTime::RFC3339),
+            'tripDepartureTime' => $tripDepartureTime->format(DateTime::RFC3339),
+            'tripDepartureCity' => $tripDepartureCity,
+            'tripArrivalCity' => $tripArrivalCity,
+        ];
+        $sql = 'INSERT INTO adds (driverId, carId, tripDate, tripDepartureTime, tripDepartureCity, tripArrivalCity) VALUES (:driverId, :carId, :tripDate, :tripDepartureTime, :tripDepartureCity, :tripArrivalCity)';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+
+    /**
+     * Update an add.
+     */
+    public function updateAdd(string $id, string $driverId, string $carId, DateTime $tripDate, DateTime $tripDepartureTime, string $tripDepartureCity, string $tripArrivalCity): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'id' => $id,
+            'driverId' => $driverId,
+            'carId' => $carId,
+            'tripDate' => $tripDate->format(DateTime::RFC3339),
+            'tripDepartureTime' => $tripDepartureTime->format(DateTime::RFC3339),
+            'tripDepartureCity' => $tripDepartureCity,
+            'tripArrivalCity' => $tripArrivalCity,
+        ];
+        $sql = 'UPDATE adds SET driverId = :driverId, carId = :carId, tripDate = :tripDate, tripDepartureTime = :tripDepartureTime, tripDepartureCity = :tripDepartureCity, tripArrivalCity = :tripArrivalCity WHERE id = :id;';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+
+    /**
+    * Return all adds.
+    */
+    public function getAdds(): array
+    {
+        $users = [];
+
+        $sql = 'SELECT * FROM adds';
+        $query = $this->connection->query($sql);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($results)) {
+            $adds = $results;
+        }
+
+        return $adds;
+    }
+
+    /**
+     * Delete an add.
+     */
+    public function deleteAdd(string $id): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'id' => $id,
+        ];
+        $sql = 'DELETE FROM adds WHERE id = :id;';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
 
