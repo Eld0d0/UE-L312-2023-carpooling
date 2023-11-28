@@ -1,0 +1,109 @@
+#menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    margin: 20px auto 20px auto;
+    height: auto;
+    width: 50%;
+}
+
+body {
+    background: linear-gradient(-45deg, #041C32, #04293A, #064663, #ECB365);
+    animation: gradientBackground 15s ease infinite;
+    height: 100%;
+    background-size: 400% 400%;
+    font-family: 'Roboto', sans-serif;
+}
+
+@keyframes gradientBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+h1 {
+    color: #fff;
+    font-size: 36px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Smooch Sans', sans-serif;
+    padding: 15px;
+}
+
+h1:after {
+    content: "";
+    display: block;
+    position: relative;
+    left: 40%;
+    width: 20%;
+    height: 3px;
+    background-color: #fff;
+}
+
+table {
+    width: 30%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+}
+
+th {
+    background-color: #041C32;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: left;
+    border: none;
+    border-radius: 20px 20px 0 0;
+}
+
+td {
+    background-color: #fff;
+    padding: 10px 20px;
+    border: none;
+    text-align: center;
+}
+
+tr:last-child td {
+    border-radius: 0 0 20px 20px;
+}
+
+a {
+    color: #212529;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #ECB365;
+}
+
+@media screen and (max-width: 1000px) {
+    #menu {
+        width: 70%;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+    }
+
+    table {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #menu {
+        width: 90%;
+    }
+}
