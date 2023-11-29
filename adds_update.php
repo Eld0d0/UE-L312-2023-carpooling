@@ -8,7 +8,7 @@ $controller = new AddsController();
 echo $controller->updateAdd();
 ?>
 
-
+<link rel="stylesheet" href="css/form.css" type="text/css" />
 <p>Mise à jour d'une annonce</p>
 <form method="post" action="adds_update.php" name ="addUpdateForm">
     <label for="id">Numéro de l'annonce à modifier <em>Id</em> :</label>

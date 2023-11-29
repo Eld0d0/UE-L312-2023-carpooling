@@ -14,7 +14,7 @@ require __DIR__ . '/vendor/autoload.php';
 $controller = new AddsController();
 echo $controller->createAdd();
 ?>
-
+<link rel="stylesheet" href="css/form.css" type="text/css" />
 <p>Création d'une annonce</p>
 <form method="post" action="adds_create.php" name ="addCreateForm">
     <label for="driverId">Numéro du conducteur <em>(Id)</em> :</label>
