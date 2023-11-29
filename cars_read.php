@@ -1,10 +1,10 @@
 <?php
 
-use App\Controllers\UsersController;
+use App\Controllers\CarsController;
 
 require __DIR__ . '/vendor/autoload.php';
 
-$controller = new UsersController();
-echo $controller->getUsers();
+$controller = new CarsController();
+echo $controller->getCars();
 ?>
 <link rel="stylesheet" href="css/form.css" type="text/css" />
