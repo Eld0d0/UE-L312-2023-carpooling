@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: stretch;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     margin: 20px auto 20px auto;
     height: auto;
     width: 50%;

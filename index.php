@@ -13,10 +13,13 @@ foreach ($pages as $page) {
     $nom_fichier = pathinfo($page, PATHINFO_FILENAME);
     $titre = str_replace('_', ' ', $nom_fichier);
     $mot_debut = strtok($titre, " ");
-    $tableau[$mot_debut][] = [
-        'titre' => $titre,
-        'lien' => $page
-    ];
+
+    if ($mot_debut !== 'index'){
+        $tableau[$mot_debut][] = [
+            'titre' => $titre,
+            'lien' => $page
+        ];
+    }
 }
 
 echo '<h1>Menu de navigation</h1>';
