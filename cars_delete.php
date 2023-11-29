@@ -10,7 +10,7 @@ require __DIR__ . '/vendor/autoload.php';
 $controller = new CarsController();
 echo $controller->deleteCar();
 ?>
-
+<link rel="stylesheet" href="css/form.css" type="text/css" />
 <p>Supression d'un véhicule (voiture)</p>
 <form method="post" action="cars_delete.php" name ="carDeleteForm">
     <label for="id">Id :</label>

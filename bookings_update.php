@@ -7,7 +7,7 @@ require __DIR__ . '/vendor/autoload.php';
 $controller = new BookingsController();
 echo $controller->updateBooking();
 ?>
-
+<link rel="stylesheet" href="css/form.css" type="text/css" />
 <p>Mise à jour d'une reservation</p>
 <form method="post" action="bookings_update.php" name ="bookingCreateForm">
     <label for="id">Numéro de la réservation à modifier <em>(Id de la reservation)</em> :</label>
