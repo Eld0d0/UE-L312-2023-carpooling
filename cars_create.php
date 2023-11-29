@@ -7,7 +7,7 @@ require __DIR__ . '/vendor/autoload.php';
 $controller = new CarsController();
 echo $controller->createCar();
 ?>
-
+<link rel="stylesheet" href="css/form.css" type="text/css" />
 <p>Ajout d'un véhicule (voiture)</p>
 <form method="post" action="cars_create.php" name ="carCreateForm">
     <label for="carmodel">Modèle :</label>

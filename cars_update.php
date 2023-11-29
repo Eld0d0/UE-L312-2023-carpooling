@@ -7,7 +7,7 @@ require __DIR__ . '/vendor/autoload.php';
 $controller = new CarsController();
 echo $controller->updateCar();
 ?>
-
+<link rel="stylesheet" href="css/form.css" type="text/css" />
 <p>Mise à jour d'un véhicule</p>
 <form method="post" action="cars_update.php" name ="carUpdateForm">
     <label for="id">Id :</label>
