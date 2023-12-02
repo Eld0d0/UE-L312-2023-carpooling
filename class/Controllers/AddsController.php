@@ -50,22 +50,6 @@ class AddsController
     public function getAdds(): string
     {
         $html = '';
-        $html = '
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Numéro</th>
-                            <th>Conducteur</th>
-                            <th>Voiture</th>
-                            <th>Places</th>
-                            <th>Date</th>
-                            <th>Heure</th>
-                            <th>Depart</th>
-                            <th>Arrivée</th>
-                        </tr>
-                    </thead>
-                <tbody>';
-
         // Get all adds :
         $addsService = new AddsService();
         $adds = $addsService->getAdds();
@@ -108,10 +92,6 @@ class AddsController
                     '<td>' . $add->getTripArrivalCity()  . '</td>' .
                 '</tr>';
         }
-
-        $html .= '</tbody>';
-        $html .= '</table>';
-
         return $html;
     }
 

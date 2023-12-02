@@ -387,4 +387,47 @@ class DataBaseService
 
         return $userCars;
     }
+
+    /**
+     * Create relation bewteen an user and his add.
+     */
+    public function setUserAdd(string $userId, string $addId): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'userId' => $userId,
+            'addId' => $addId,
+        ];
+        $sql = 'INSERT INTO users_adds (add_id, user_id) VALUES (:addId, :userId)';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+
+    /**
+     * Get cars of given user id.
+     */
+    public function getUserAdds(string $userId): array
+    {
+        $userAdds = [];
+
+        $data = [
+            'userId' => $userId,
+        ];
+        $sql = '
+            SELECT a.*
+            FROM adds as a
+            LEFT JOIN users_adds as ua ON ua.add_id = a.id
+            WHERE ua.user_id = :userId';
+        $query = $this->connection->prepare($sql);
+        $query->execute($data);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($results)) {
+            $userAdds = $results;
+        }
+
+        return $userAdds;
+    }
 }

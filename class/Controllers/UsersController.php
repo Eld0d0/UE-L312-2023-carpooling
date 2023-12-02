@@ -53,19 +53,7 @@ class UsersController
      */
     public function getUsers(): string
     {
-        $html = '
-                 <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Prénom</th>
-                            <th>Nom</th>
-                            <th>Email</th>
-                            <th>DOB</th>
-                            <th>Voitures</th>
-                        </tr>
-                    </thead>
-                 <tbody>';
+        $html = '';
 		
         // Get all users :
         $usersService = new UsersService();
@@ -79,6 +67,13 @@ class UsersController
                     $carsHtml .= $car->getCarModel() . ' ' . $car->getColor() . ' ' . $car->getCapacity() . ' places.<br/>';
                 }
             }
+            
+            $usersAdds = '';
+            if (!empty($user->getAdds())) {
+                foreach ($user->getAdds() as $add) {
+                    $usersAdds .= 'N°'. $add->getId() . ' de ' . $add->getTripDepartureCity() . ' à ' . $add->getTripArrivalCity() . ' le '. $add->getTripDateAndTime()->format('d/m/Y') .'<br/>';
+                }
+            }
 
             $html .=
                 '<tr>'.
@@ -88,11 +83,9 @@ class UsersController
                     '<td>' . $user->getEmail() . '</td>' .
                     '<td>' . $user->getBirthday()->format('d/m/Y') . '</td>'.
                     '<td>' . $carsHtml. '</td>'.
+                    '<td>' . $usersAdds. '</td>'.
                 '</tr>';
         }
-
-        $html .= '</tbody>';
-        $html .= '</table>';
 
         return $html;
     }

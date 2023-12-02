@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Entities\User;
 use App\Entities\Car;
+use App\Entities\Add;
 use DateTime;
 
 class UsersService
@@ -51,6 +52,10 @@ class UsersService
                 $cars = $this->getUserCars($userDTO['id']);
                 $user->setCars($cars);
 
+                // Get adds of this user :
+                $adds = $this->getUserAdds($userDTO['id']);
+                $user->setAdds($adds);
+
                 $users[] = $user;
             }
         }
@@ -70,6 +75,7 @@ class UsersService
 
         return $isOk;
     }
+
 
     /**
      * Create relation bewteen an user and his car.
@@ -107,5 +113,47 @@ class UsersService
         }
 
         return $userCars;
+    }
+
+
+    /**
+     * Create relation bewteen an user and adds.
+     */
+    public function setUserAdd(string $userId, string $addId): bool
+    {
+        $isOk = false;
+
+        $dataBaseService = new DataBaseService();
+        $isOk = $dataBaseService->setUserAdd($userId, $addId);
+
+        return $isOk;
+    }
+
+    /**
+     * Get adds of given user id.
+     */
+    public function getUserAdds(string $userId): array
+    {
+        $userAdds = [];
+
+        $dataBaseService = new DataBaseService();
+
+        // Get relation users and adds :
+        $usersAddsDTO = $dataBaseService->getUserAdds($userId);
+        if (!empty($usersAddsDTO)) {
+            foreach ($usersAddsDTO as $userAddDTO) {
+
+                $date = new DateTime($userAddDTO['tripDateAndTime']);
+                $add = new Add();
+                $add->setId($userAddDTO['id']);
+                $add->setDriverId($userAddDTO['driverId']);
+                $add->setCarId($userAddDTO['carId']);
+                $add->setTripDateAndTime($date);
+                $add->setTripDepartureCity($userAddDTO['tripDepartureCity']);
+                $add->setTripArrivalCity($userAddDTO['tripArrivalCity']);
+                $userAdds[] = $add;
+            }
+        }
+        return $userAdds;
     }
 }
