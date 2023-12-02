@@ -76,7 +76,11 @@ class UsersController
             $carsHtml = '';
             if (!empty($user->getCars())) {
                 foreach ($user->getCars() as $car) {
-                    $carsHtml .= $car->getCarModel() . ' ' . $car->getColor() . ' ' . $car->getCapacity() . ' places.';
+                    $carsHtml .= $car->getCarModel() . ' ' . $car->getColor() . ' ' . $car->getCapacity() . ' places.<br/>';
+                    // echo '<pre>';
+                    // var_dump($carsHtml);
+                    // echo '</pre>';
+                    // die;
                 }
             }
 
@@ -86,7 +90,7 @@ class UsersController
                     '<td>' . $user->getFirstname() . '</td>' .
                     '<td>' . $user->getLastname() . '</td>' .
                     '<td>' . $user->getEmail() . '</td>' .
-                    '<td>' . $user->getBirthday()->format('d-m-Y') . '</td>'.
+                    '<td>' . $user->getBirthday()->format('d/m/Y') . '</td>'.
                     '<td>' . $carsHtml. '</td>'.
                 '</tr>';
         }

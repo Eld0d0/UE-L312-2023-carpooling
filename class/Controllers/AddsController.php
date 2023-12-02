@@ -47,6 +47,20 @@ class AddsController
     public function getAdds(): string
     {
         $html = '';
+        $html = '
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Numéro</th>
+                            <th>Conducteur</th>
+                            <th>Voiture</th>
+                            <th>Date</th>
+                            <th>Heure</th>
+                            <th>Depart</th>
+                            <th>Arrivée</th>
+                        </tr>
+                    </thead>
+                <tbody>';
 
         // Get all adds :
         $addsService = new AddsService();
@@ -55,14 +69,19 @@ class AddsController
         // Get html :
         foreach ($adds as $add) {
             $html .=
-                '# ' . $add->getId() . ' ' .
-                $add->getDriverId() . ' ' .
-                $add->getCarId() . ' ' .
-                $add->getTripDateAndTime()->format('d-m-Y') . ' '.
-                $add->getTripDateAndTime()->format('H:i:s') . ' '.
-                $add->getTripDepartureCity() . ' '.
-                $add->getTripArrivalCity() . '<br />';
+                '<tr>'.
+                    '<td>' . $add->getId() . '</td>' .
+                    '<td>' . $add->getDriverId()  . '</td>' .
+                    '<td>' . $add->getCarId() . '</td>' .
+                    '<td>' . $add->getTripDateAndTime()->format('d/mY') . '</td>' .
+                    '<td>' . $add->getTripDateAndTime()->format('H:i') . '</td>' .
+                    '<td>' . $add->getTripDepartureCity() . '</td>' .
+                    '<td>' . $add->getTripArrivalCity()  . '</td>' .
+                '</tr>';
         }
+
+        $html .= '</tbody>';
+        $html .= '</table>';
 
         return $html;
     }

@@ -90,6 +90,12 @@ input[type="submit"]:hover {
     cursor: pointer;
 }
 
+td,
+th {
+    padding-inline: 10px;
+    text-align: left;
+}
+
 @media screen and (max-width: 1000px) {
     form {
         width: 70%;
