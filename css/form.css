@@ -90,11 +90,15 @@ input[type="submit"]:hover {
     cursor: pointer;
 }
 
-td,
-th {
-    padding-inline: 10px;
+table,
+th,
+td {
+    border: 1px solid;
+    border-collapse: collapse;
+    padding: 10px;
     text-align: left;
 }
+
 
 @media screen and (max-width: 1000px) {
     form {
