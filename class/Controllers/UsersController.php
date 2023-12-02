@@ -77,10 +77,6 @@ class UsersController
             if (!empty($user->getCars())) {
                 foreach ($user->getCars() as $car) {
                     $carsHtml .= $car->getCarModel() . ' ' . $car->getColor() . ' ' . $car->getCapacity() . ' places.<br/>';
-                    // echo '<pre>';
-                    // var_dump($carsHtml);
-                    // echo '</pre>';
-                    // die;
                 }
             }
 

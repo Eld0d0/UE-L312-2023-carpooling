@@ -3,6 +3,9 @@
 namespace App\Controllers;
 
 use App\Services\AddsService;
+use App\Services\UsersService;
+use App\Services\CarsService;
+
 use DateTime;
 
 class AddsController
@@ -54,6 +57,7 @@ class AddsController
                             <th>Numéro</th>
                             <th>Conducteur</th>
                             <th>Voiture</th>
+                            <th>Places</th>
                             <th>Date</th>
                             <th>Heure</th>
                             <th>Depart</th>
@@ -66,13 +70,38 @@ class AddsController
         $addsService = new AddsService();
         $adds = $addsService->getAdds();
 
+        // Get all users :
+        $usersService = new UsersService();
+        $users = $usersService->getUsers();
+
+        // Get all cars :
+        $carsService = new CarsService();
+        $cars = $carsService->getCars();
+
         // Get html :
         foreach ($adds as $add) {
+            $driverName ='';
+            foreach($users as $user){
+                if($user->getId() === $add->getDriverId()){
+                    $driverName = $user->getFirstname().' '. $user->getLastname();
+                }
+            }
+
+            $carModel ='';
+            $carCapacity ='';
+            foreach($cars as $car){
+                if($car->getId() === $add->getDriverId()){
+                    $carModel = $car->getCarModel();
+                    $carCapacity = $car->getCapacity();
+                }
+            }
+
             $html .=
                 '<tr>'.
                     '<td>' . $add->getId() . '</td>' .
-                    '<td>' . $add->getDriverId()  . '</td>' .
-                    '<td>' . $add->getCarId() . '</td>' .
+                    '<td>' . $driverName . '</td>' .
+                    '<td>' . $carModel . '</td>' .
+                    '<td>' . $carCapacity . '</td>' .
                     '<td>' . $add->getTripDateAndTime()->format('d/mY') . '</td>' .
                     '<td>' . $add->getTripDateAndTime()->format('H:i') . '</td>' .
                     '<td>' . $add->getTripDepartureCity() . '</td>' .

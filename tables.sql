@@ -32,14 +32,14 @@ CREATE TABLE `cars` (
   `carmodel` varchar(255) NOT NULL,
   `color` varchar(255) NOT NULL,
   `capacity` varchar(255) NOT NULL,
-  `driver` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `cars` (`id`, `carmodel`, `color`, `capacity`, `driver`) VALUES
-(1, 'Fiat Multipla', 'Rouge', '3', 'Mark'),
-(2, 'Porsche cayen', 'Noir', '1', 'Cléa'),
-(3, 'Citroen picasso C4', 'Gris', '3', 'Théo');
+INSERT INTO `cars` (`id`, `carmodel`, `color`, `capacity`) VALUES
+(1, 'Fiat Multipla', 'Rouge', '3'),
+(2, 'Porsche cayen', 'Noir', '1'),
+(3, 'Citroen picasso C4', 'Gris', '3'),
+(4, 'Mercedes', 'Rose', '7');
 
 
 CREATE TABLE `bookings` (
@@ -66,3 +66,17 @@ INSERT INTO `users_cars` (`id`, `user_id`, `car_id`) VALUES
 (2, 1, 2),
 (3, 2, 3),
 (4, 3, 4);
+
+
+CREATE TABLE `users_adds` (
+  `id` int AUTO_INCREMENT NOT NULL,
+  `add_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `users_adds` (`id`, `user_id`, `add_id`) VALUES
+(1, 1, 1),
+(2, 2, 2),
+(3, 2, 7),
+(4, 3, 3);
