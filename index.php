@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 <?php
-
+    
 $dossier_pages = __DIR__;
 
 $contenu_dossier = scandir($dossier_pages);
