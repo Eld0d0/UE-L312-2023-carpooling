@@ -53,3 +53,16 @@ INSERT INTO `bookings` (`id`, `addId`, `passengerId`) VALUES
 (1, 2, 3),
 (2, 3, 2),
 (3, 1, 1);
+
+CREATE TABLE `users_cars` (
+  `id` int AUTO_INCREMENT NOT NULL,
+  `user_id` int NOT NULL,
+  `car_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `users_cars` (`id`, `user_id`, `car_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 2, 3),
+(4, 3, 4);

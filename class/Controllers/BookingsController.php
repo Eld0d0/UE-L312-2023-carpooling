@@ -47,7 +47,7 @@ class BookingsController
         // Get html :
         foreach ($bookings as $booking) {
             $html .=
-                '#' . $booking->getId() . ' ' .
+                '# ' . $booking->getId() . ' ' .
                 $booking->getAddId() . ' ' .
                 $booking->getPassengerId() . '<br/>' ;
         }

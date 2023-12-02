@@ -19,8 +19,5 @@ echo $controller->createCar();
     <label for="capacity">Capacité (nombre de siège hors conducteur) :</label>
     <input type="text" name="capacity">
     <br />
-    <label for="driver">Conducteur :</label>
-    <input type="text" name="driver">
-    <br />
     <input type="submit" value="Ajout d'une voiture">
 </form>

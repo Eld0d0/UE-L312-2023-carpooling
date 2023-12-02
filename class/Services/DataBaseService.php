@@ -117,7 +117,7 @@ class DataBaseService
     /**
      * Create a car.
      */
-    public function createCar(string $carmodel, string $color, string $capacity, string $driver): bool
+    public function createCar(string $carmodel, string $color, string $capacity): bool
     {
         $isOk = false;
 
@@ -125,9 +125,8 @@ class DataBaseService
             'carmodel' => $carmodel,
             'color' => $color,
             'capacity' => $capacity,
-            'driver' => $driver,
         ];
-        $sql = 'INSERT INTO cars (carmodel, color, capacity, driver) VALUES (:carmodel, :color, :capacity, :driver)';
+        $sql = 'INSERT INTO cars (carmodel, color, capacity) VALUES (:carmodel, :color, :capacity)';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
 
@@ -154,7 +153,7 @@ class DataBaseService
     /**
      * Update a car.
      */
-    public function updateCar(string $id, string $carmodel, string $color, string $capacity, string $driver): bool
+    public function updateCar(string $id, string $carmodel, string $color, string $capacity): bool
     {
         $isOk = false;
 
@@ -163,9 +162,8 @@ class DataBaseService
             'carmodel' => $carmodel,
             'color' => $color,
             'capacity' => $capacity,
-            'driver' => $driver,
         ];
-        $sql = 'UPDATE cars SET carmodel = :carmodel, color = :color, capacity = :capacity, driver = :driver WHERE id = :id;';
+        $sql = 'UPDATE cars SET carmodel = :carmodel, color = :color, capacity = :capacity WHERE id = :id;';
         $query = $this->connection->prepare($sql);
         $isOk = $query->execute($data);
 
@@ -339,5 +337,54 @@ class DataBaseService
         $isOk = $query->execute($data);
 
         return $isOk;
+    }
+
+
+    #####################################
+    ############ RELATIONS ###############
+    #####################################
+
+
+    /**
+     * Create relation bewteen an user and his car.
+     */
+    public function setUserCar(string $userId, string $carId): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'userId' => $userId,
+            'carId' => $carId,
+        ];
+        $sql = 'INSERT INTO users_cars (user_id, car_id) VALUES (:userId, :carId)';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+
+    /**
+     * Get cars of given user id.
+     */
+    public function getUserCars(string $userId): array
+    {
+        $userCars = [];
+
+        $data = [
+            'userId' => $userId,
+        ];
+        $sql = '
+            SELECT c.*
+            FROM cars as c
+            LEFT JOIN users_cars as uc ON uc.car_id = c.id
+            WHERE uc.user_id = :userId';
+        $query = $this->connection->prepare($sql);
+        $query->execute($data);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($results)) {
+            $userCars = $results;
+        }
+
+        return $userCars;
     }
 }

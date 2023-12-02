@@ -8,15 +8,15 @@ use DateTime;
 class CarsService
 {
 
-    public function setCar(?string $id, string $carmodel, string $color, string $capacity, string $driver): bool
+    public function setCar(?string $id, string $carmodel, string $color, string $capacity): bool
     {
         $isOk = false;
 
         $dataBaseService = new DataBaseService();
         if (empty($id)) {
-            $isOk = $dataBaseService->createCar($carmodel, $color, $capacity, $driver);
+            $isOk = $dataBaseService->createCar($carmodel, $color, $capacity);
         } else {
-            $isOk = $dataBaseService->updateCar($id, $carmodel, $color, $capacity, $driver);
+            $isOk = $dataBaseService->updateCar($id, $carmodel, $color, $capacity);
         }
 
         return $isOk;
@@ -35,7 +35,6 @@ class CarsService
                 $car->setCarModel($carDTO['carmodel']);
                 $car->setColor($carDTO['color']);
                 $car->setCapacity($carDTO['capacity']);
-                $car->setDriver($carDTO['driver']);
 
                 $cars[] = $car;
             }

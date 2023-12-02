@@ -22,8 +22,5 @@ echo $controller->updateCar();
     <label for="capacity">Capacité :</label>
     <input type="text" name="capacity">
     <br />
-    <label for="driver">Conducteur :</label>
-    <input type="text" name="driver">
-    <br />
     <input type="submit" value="Modifier le véhicule">
 </form>

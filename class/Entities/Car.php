@@ -9,7 +9,6 @@ class Car
     private $id;                // Numéro d'identification du véhicule
     private $carModel;          // Modèle de voiture
     private $color;             // Couleur du véhicule
-    private $driver;         // Chauffeur de voiture pour le covoiturage
     private $capacity;          // Capacité en passagers des voitures
 
     public function getId(): string
@@ -38,16 +37,6 @@ class Car
     public function setColor(string $color): void
     {
         $this->color = $color;
-    }
-
-
-    public function getDriver(): string
-    {
-        return $this->driver;
-    }
-    public function setDriver(string $driver): void
-    {
-        $this->driver = $driver;
     }
 
 

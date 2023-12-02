@@ -17,7 +17,8 @@ class UsersController
         if (isset($_POST['firstname']) &&
             isset($_POST['lastname']) &&
             isset($_POST['email']) &&
-            isset($_POST['birthday'])) {
+            isset($_POST['birthday'])&&
+            isset($_POST['cars'])) {
             // Create the user :
             $usersService = new UsersService();
             $isOk = $usersService->setUser(
@@ -27,7 +28,15 @@ class UsersController
                 $_POST['email'],
                 $_POST['birthday']
             );
-            if ($isOk) {
+
+            // Create the user cars relations :
+            $isOk = true;
+            if (!empty($_POST['cars'])) {
+                foreach ($_POST['cars'] as $carId) {
+                    $isOk = $usersService->setUserCar($userId, $carId);
+                }
+            }
+            if ($userId && $isOk) {
                 $html = 'Utilisateur créé avec succès.';
             } else {
                 $html = 'Erreur lors de la création de l\'utilisateur.';
@@ -37,26 +46,53 @@ class UsersController
         return $html;
     }
 
+
+
     /**
      * Return the html for the read action.
      */
     public function getUsers(): string
     {
-        $html = '';
-
+        $html = '
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>DOB</th>
+                            <th>Voitures</th>
+                        </tr>
+                    </thead>
+                 <tbody>';
+		
         // Get all users :
         $usersService = new UsersService();
         $users = $usersService->getUsers();
 
         // Get html :
         foreach ($users as $user) {
+            $carsHtml = '';
+            if (!empty($user->getCars())) {
+                foreach ($user->getCars() as $car) {
+                    $carsHtml .= $car->getCarModel() . ' ' . $car->getColor() . ' ' . $car->getCapacity() . ' places.';
+                }
+            }
+
             $html .=
-                '#' . $user->getId() . ' ' .
-                $user->getFirstname() . ' ' .
-                $user->getLastname() . ' ' .
-                $user->getEmail() . ' ' .
-                $user->getBirthday()->format('d-m-Y') . '<br />';
+                '<tr>'.
+                    '<td>' . $user->getId() . '</td>' .
+                    '<td>' . $user->getFirstname() . '</td>' .
+                    '<td>' . $user->getLastname() . '</td>' .
+                    '<td>' . $user->getEmail() . '</td>' .
+                    '<td>' . $user->getBirthday()->format('d-m-Y') . '</td>'.
+                    '<td>' . $carsHtml. '</td>'.
+                '</tr>';
         }
+
+        $html .= '</tbody>';
+        $html .= '</table>';
 
         return $html;
     }

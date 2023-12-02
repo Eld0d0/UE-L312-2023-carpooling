@@ -13,8 +13,7 @@ class CarsController
 
         if (isset($_POST['carmodel']) &&
             isset($_POST['color']) &&
-            isset($_POST['capacity']) &&
-            isset($_POST['driver'])) {
+            isset($_POST['capacity'])) {
             
             $carsService = new CarsService();
             $isOk = $carsService->setCar(
@@ -22,12 +21,11 @@ class CarsController
                 $_POST['carmodel'],
                 $_POST['color'],
                 $_POST['capacity'],
-                $_POST['driver']
             );
             if ($isOk) {
-                $html = 'Voiture ajoutée à l\'utilisateur avec succès';
+                $html = 'Voiture créée avec succès';
             } else {
-                $html = 'Erreur lors de l\'ajout à l\'utilisateur.';
+                $html = 'Erreur lors de la création du véhicule.';
             }
         }
 
@@ -45,11 +43,10 @@ class CarsController
         // Get html :
         foreach ($cars as $car) {
             $html .=
-                '#' . $car->getId() . ' ' .
+                '# ' . $car->getId() . ' ' .
                 $car->getCarModel() . ' ' .
                 $car->getColor() . ' ' .
-                $car->getCapacity() . ' ' .
-                $car->getDriver() . '<br />';
+                $car->getCapacity() . ' places.<br />';
         }
 
         return $html;
@@ -62,19 +59,17 @@ class CarsController
         if (isset($_POST['id']) &&
             isset($_POST['carmodel']) &&
             isset($_POST['color']) &&
-            isset($_POST['capacity']) &&
-            isset($_POST['driver'])) {
+            isset($_POST['capacity'])) {
 
             $carsService = new CarsService();
             $isOk = $carsService->setCar(
                 $_POST['id'],
                 $_POST['carmodel'],
                 $_POST['color'],
-                $_POST['capacity'],
-                $_POST['driver']
+                $_POST['capacity']
             );
             if ($isOk) {
-                $html = 'Voiture mis à jour avec succès.';
+                $html = 'Propriété de la voiture mise à jour avec succès.';
             } else {
                 $html = 'Erreur lors de la mise à jour du véhicule.';
             }

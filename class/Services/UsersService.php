@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Entities\User;
+use App\Entities\Car;
 use DateTime;
 
 class UsersService
@@ -43,14 +44,19 @@ class UsersService
                 $user->setEmail($userDTO['email']);
                 $date = new DateTime($userDTO['birthday']);
                 if ($date !== false) {
-                    $user->setbirthday($date);
+                    $user->setBirthday($date);
                 }
+
+                // Get cars of this user :
+                $cars = $this->getUserCars($userDTO['id']);
+                $user->setCars($cars);
+
                 $users[] = $user;
             }
         }
-
         return $users;
     }
+
 
     /**
      * Delete an user.
@@ -63,5 +69,43 @@ class UsersService
         $isOk = $dataBaseService->deleteUser($id);
 
         return $isOk;
+    }
+
+    /**
+     * Create relation bewteen an user and his car.
+     */
+    public function setUserCar(string $userId, string $carId): bool
+    {
+        $isOk = false;
+
+        $dataBaseService = new DataBaseService();
+        $isOk = $dataBaseService->setUserCar($userId, $carId);
+
+        return $isOk;
+    }
+
+    /**
+     * Get cars of given user id.
+     */
+    public function getUserCars(string $userId): array
+    {
+        $userCars = [];
+
+        $dataBaseService = new DataBaseService();
+
+        // Get relation users and cars :
+        $usersCarsDTO = $dataBaseService->getUserCars($userId);
+        if (!empty($usersCarsDTO)) {
+            foreach ($usersCarsDTO as $userCarDTO) {
+                $car = new Car();
+                $car->setId($userCarDTO['id']);
+                $car->setCarModel($userCarDTO['carmodel']);
+                $car->setColor($userCarDTO['color']);
+                $car->setCapacity($userCarDTO['capacity']);
+                $userCars[] = $car;
+            }
+        }
+
+        return $userCars;
     }
 }
