@@ -474,25 +474,6 @@ class DataBaseService
         return $userAdds;
     }
 
-
-    /**
-     * Create relation bewteen an add and his booking.
-     */
-    public function setAddBooking(string $addId, string $bookingId): bool
-    {
-        $isOk = false;
-
-        $data = [
-            'addId' => $addId,
-            'bookingId' => $bookingId,
-        ];
-        $sql = 'INSERT INTO adds_bookings (add_id, booking_id) VALUES (:addId, :bookingId)';
-        $query = $this->connection->prepare($sql);
-        $isOk = $query->execute($data);
-
-        return $isOk;
-    }
-
     /**
      * Get booking of given add id.
      */
@@ -506,8 +487,8 @@ class DataBaseService
         $sql = '
             SELECT b.*
             FROM bookings as b
-            LEFT JOIN adds_bookings a ab ON ab.booking_id = b.id
-            WHERE ab.add_id = :addId';
+            LEFT JOIN adds as a ON b.addId = a.id
+            WHERE b.addId = :addId';
         $query = $this->connection->prepare($sql);
         $query->execute($data);
         $results = $query->fetchAll(PDO::FETCH_ASSOC);

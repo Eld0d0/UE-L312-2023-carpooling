@@ -96,7 +96,7 @@ class AddsService
         $dataBaseService = new DataBaseService();
 
         // Get relation adds and bookings :
-        $addsBookingsDTO = $dataBaseService->getUserBookings($addId);
+        $addsBookingsDTO = $dataBaseService->getAddBookings($addId);
         if (!empty($addsBookingsDTO)) {
             foreach ($addsBookingsDTO as $addBookingDTO) {
                 $booking = new Booking();

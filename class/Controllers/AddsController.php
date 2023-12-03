@@ -83,7 +83,7 @@ class AddsController
             $addsBookings = '';
             if (!empty($add->getBookings())) {
                 foreach ($add->getBookings() as $booking) {
-                    $addsBookings .= 'Annonce : ' . $booking->getAddId() . ', Passager : ' . $booking->getPassengerId() . '.<br/>';
+                    $addsBookings .= 'Utilisateur passager n° ' . $booking->getPassengerId() . '.<br/>';
                 }
             }
 
@@ -93,7 +93,7 @@ class AddsController
                     '<td>' . $driverName . '</td>' .
                     '<td>' . $carModel . '</td>' .
                     '<td>' . $carCapacity . '</td>' .
-                    '<td>' . $add->getTripDateAndTime()->format('d/mY') . '</td>' .
+                    '<td>' . $add->getTripDateAndTime()->format('d/m/Y') . '</td>' .
                     '<td>' . $add->getTripDateAndTime()->format('H:i') . '</td>' .
                     '<td>' . $add->getTripDepartureCity() . '</td>' .
                     '<td>' . $add->getTripArrivalCity()  . '</td>' .
