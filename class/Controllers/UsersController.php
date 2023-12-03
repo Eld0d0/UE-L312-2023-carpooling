@@ -75,6 +75,13 @@ class UsersController
                 }
             }
 
+            $usersBookings = '';
+            if (!empty($user->getBookings())) {
+                foreach ($user->getBookings() as $booking) {
+                    $usersBookings .= 'Annonce : ' . $booking->getAddId() . ', Passager : ' . $booking->getPassengerId() . '.<br/>';
+                }
+            }
+
             $html .=
                 '<tr>'.
                     '<td>' . $user->getId() . '</td>' .
@@ -84,6 +91,7 @@ class UsersController
                     '<td>' . $user->getBirthday()->format('d/m/Y') . '</td>'.
                     '<td>' . $carsHtml. '</td>'.
                     '<td>' . $usersAdds. '</td>'.
+                    '<td>' . $usersBookings. '</td>'.
                 '</tr>';
         }
 

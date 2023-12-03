@@ -16,6 +16,7 @@ echo '<main>
                 <th>DOB</th>
                 <th>Voitures</th>
                 <th>Annonces</th>
+                <th>Réservations</th>
             </tr>
             </thead>
             <tbody>';

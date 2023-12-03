@@ -12,7 +12,8 @@ class User
     private $email;
     private $birthday;
     private $cars;  
-    private $adds;  
+    private $adds;
+    private $bookings;
 
     public function getId(): string
     {
@@ -82,6 +83,20 @@ class User
     public function setAdds(array $adds)
     {
         $this->adds = $adds;
+
+        return $this;
+    }
+
+    public function getBookings(array $bookings)
+    {
+        $this->bookings = $bookings;
+
+        return $this;
+    }
+
+    public function setBookings(array $bookings)
+    {
+        $this->bookings = $bookings;
 
         return $this;
     }

@@ -36,17 +36,21 @@ class CarsController
     public function getCars(): string
     {
         $html = '';
-
+		
+        // Get all cars :
         $carsService = new CarsService();
         $cars = $carsService->getCars();
 
         // Get html :
         foreach ($cars as $car) {
+
             $html .=
-                '# ' . $car->getId() . ' ' .
-                $car->getCarModel() . ' ' .
-                $car->getColor() . ' ' .
-                $car->getCapacity() . ' places.<br />';
+                '<tr>'.
+                    '<td>' . $car->getId() . '</td>' .
+                    '<td>' . $car->getCarModel() . '</td>' .
+                    '<td>' . $car->getColor() . '</td>' .
+                    '<td>' . $car->getCapacity() . '</td>' .
+                '</tr>';
         }
 
         return $html;
