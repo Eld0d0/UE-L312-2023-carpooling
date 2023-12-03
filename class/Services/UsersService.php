@@ -148,12 +148,12 @@ class UsersService
         if (!empty($usersBookingsDTO)) {
             foreach ($usersBookingsDTO as $userBookingDTO) {
                 $booking = new Booking();
-                $booking->setId($bookingDTO['id']);
-                $booking->setaddId($bookingDTO['addId']);
-                $booking->setPassengerId($bookingDTO['passengerId']);
-                $bookings[] = $booking;
+                $booking->setId($userBookingDTO['id']);
+                $booking->setaddId($userBookingDTO['addId']);
+                $booking->setPassengerId($userBookingDTO['passengerId']);
+                $userBookings[] = $booking;
             }
-        }
+        }   
         return $userBookings;
     }
 

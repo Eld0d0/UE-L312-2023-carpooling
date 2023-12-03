@@ -87,11 +87,9 @@ class User
         return $this;
     }
 
-    public function getBookings(array $bookings)
+    public function getBookings(): ?array
     {
-        $this->bookings = $bookings;
-
-        return $this;
+        return $this->bookings;
     }
 
     public function setBookings(array $bookings)
