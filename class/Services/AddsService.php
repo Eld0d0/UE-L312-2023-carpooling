@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Entities\Add;
+use App\Entities\Booking;
 use DateTime;
 
 class AddsService
@@ -45,6 +46,12 @@ class AddsService
                 if ($tripDate !== false) {
                     $add->setTripDateAndTime($tripDateAndTime);
                 }
+
+                // Get Bookings of this add :
+                $bookings = $this->getAddBookings($addDTO['id']);
+                $add->setBookings($bookings);
+
+
                 $adds[] = $add;
             }
         }
@@ -64,4 +71,42 @@ class AddsService
 
         return $isOk;
     }
+
+
+    /**
+     * Create relation bewteen an add and bookings.
+     */
+    public function setAddBooking(string $addId, string $bookingId): bool
+    {
+        $isOk = false;
+
+        $dataBaseService = new DataBaseService();
+        $isOk = $dataBaseService->setAddBooking($addId, $bookingId);
+
+        return $isOk;
+    }
+
+    /**
+     * Get bookings of given add id.
+     */
+    public function getAddBookings(string $addId): array
+    {
+        $addBookings = [];
+
+        $dataBaseService = new DataBaseService();
+
+        // Get relation adds and bookings :
+        $addsBookingsDTO = $dataBaseService->getUserBookings($addId);
+        if (!empty($addsBookingsDTO)) {
+            foreach ($addsBookingsDTO as $addBookingDTO) {
+                $booking = new Booking();
+                $booking->setId($addBookingDTO['id']);
+                $booking->setaddId($addBookingDTO['addId']);
+                $booking->setPassengerId($addBookingDTO['passengerId']);
+                $addBookings[] = $booking;
+            }
+        }   
+        return $addBookings;
+    }
+
 }

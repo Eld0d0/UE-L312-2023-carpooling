@@ -80,6 +80,13 @@ class AddsController
                 }
             }
 
+            $addsBookings = '';
+            if (!empty($add->getBookings())) {
+                foreach ($add->getBookings() as $booking) {
+                    $addsBookings .= 'Annonce : ' . $booking->getAddId() . ', Passager : ' . $booking->getPassengerId() . '.<br/>';
+                }
+            }
+
             $html .=
                 '<tr>'.
                     '<td>' . $add->getId() . '</td>' .
@@ -90,6 +97,7 @@ class AddsController
                     '<td>' . $add->getTripDateAndTime()->format('H:i') . '</td>' .
                     '<td>' . $add->getTripDepartureCity() . '</td>' .
                     '<td>' . $add->getTripArrivalCity()  . '</td>' .
+                    '<td>' . $addsBookings  . '</td>' .
                 '</tr>';
         }
         return $html;
