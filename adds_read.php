@@ -17,6 +17,7 @@ echo '<main>
                 <th>Heure</th>
                 <th>Depart</th>
                 <th>Arrivée</th>
+                <th>Réservation</th>
             </tr>
             </thead>
             <tbody>';

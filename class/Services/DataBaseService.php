@@ -389,6 +389,49 @@ class DataBaseService
     }
 
     /**
+     * Create relation bewteen an user and his car.
+     */
+    public function setUserBooking(string $userId, string $bookingId): bool
+    {
+        $isOk = false;
+
+        $data = [
+            'userId' => $userId,
+            'bookingId' => $bookingId,
+        ];
+        $sql = 'INSERT INTO users_bookings (user_id, booking_id) VALUES (:userId, :bookingId)';
+        $query = $this->connection->prepare($sql);
+        $isOk = $query->execute($data);
+
+        return $isOk;
+    }
+
+    /**
+     * Get booking of given user id.
+     */
+    public function getUserBookings(string $userId): array
+    {
+        $userBookings = [];
+
+        $data = [
+            'userId' => $userId,
+        ];
+        $sql = '
+            SELECT b.*
+            FROM bookings as b
+            LEFT JOIN users_bookings as ub ON ub.booking_id = b.id
+            WHERE ub.user_id = :userId';
+        $query = $this->connection->prepare($sql);
+        $query->execute($data);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($results)) {
+            $userBookings = $results;
+        }
+
+        return $userBookings;
+    }
+
+    /**
      * Create relation bewteen an user and his add.
      */
     public function setUserAdd(string $userId, string $addId): bool
@@ -429,5 +472,30 @@ class DataBaseService
         }
 
         return $userAdds;
+    }
+
+    /**
+     * Get booking of given add id.
+     */
+    public function getAddBookings(string $addId): array
+    {
+        $addBookings = [];
+
+        $data = [
+            'addId' => $addId,
+        ];
+        $sql = '
+            SELECT b.*
+            FROM bookings as b
+            LEFT JOIN adds as a ON b.addId = a.id
+            WHERE b.addId = :addId';
+        $query = $this->connection->prepare($sql);
+        $query->execute($data);
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($results)) {
+            $addBookings = $results;
+        }
+
+        return $addBookings;
     }
 }

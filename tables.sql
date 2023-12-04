@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : sam. 02 déc. 2023 à 15:50
--- Version du serveur : 8.0.35-0ubuntu0.20.04.1
--- Version de PHP : 8.0.30
+-- Généré le : lun. 04 déc. 2023 à 00:00
+-- Version du serveur : 8.0.26-0ubuntu0.20.04.2
+-- Version de PHP : 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -65,7 +65,8 @@ CREATE TABLE `bookings` (
 INSERT INTO `bookings` (`id`, `addId`, `passengerId`) VALUES
 (1, 2, 3),
 (2, 3, 2),
-(3, 1, 1);
+(3, 2, 2),
+(4, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -111,7 +112,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `birthday`) VALUES
 (1, 'Vincent', 'Godé', 'hello@vincentgo.fr', '1990-11-19 00:00:00'),
 (2, 'Albert', 'Dupond', 'sonemail@gmail.com', '1985-11-21 00:00:00'),
-(3, 'Thomas', 'Dumoulin', 'sonemail2@gmail.com', '1985-10-08 00:00:00');
+(3, 'Thomas', 'Dumoulin', 'sonemail2@gmail.com', '1985-10-08 00:00:00'),
+(5, 'zdz', 'dzdz', 'dzdz', '2023-12-27 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -133,6 +135,28 @@ INSERT INTO `users_adds` (`id`, `add_id`, `user_id`) VALUES
 (1, 1, 1),
 (2, 2, 2),
 (3, 7, 2),
+(4, 3, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users_bookings`
+--
+
+CREATE TABLE `users_bookings` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `booking_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `users_bookings`
+--
+
+INSERT INTO `users_bookings` (`id`, `user_id`, `booking_id`) VALUES
+(1, 2, 3),
+(2, 1, 1),
+(3, 2, 2),
 (4, 3, 3);
 
 -- --------------------------------------------------------
@@ -192,6 +216,12 @@ ALTER TABLE `users_adds`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `users_bookings`
+--
+ALTER TABLE `users_bookings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `users_cars`
 --
 ALTER TABLE `users_cars`
@@ -205,7 +235,7 @@ ALTER TABLE `users_cars`
 -- AUTO_INCREMENT pour la table `adds`
 --
 ALTER TABLE `adds`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `bookings`
@@ -223,12 +253,18 @@ ALTER TABLE `cars`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `users_adds`
 --
 ALTER TABLE `users_adds`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `users_bookings`
+--
+ALTER TABLE `users_bookings`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --

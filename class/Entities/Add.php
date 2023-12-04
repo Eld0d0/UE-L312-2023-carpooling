@@ -12,7 +12,7 @@ class Add
     private $tripDateAndTime;       //Trip departure date and time
     private $tripDepartureCity;     //Trip departure city
     private $tripArrivalCity;       //Trip arrival city
-
+    private $bookings;
 
 
     /* Add ID getter && setter */
@@ -81,6 +81,18 @@ class Add
     public function setTripArrivalCity(string $tripArrivalCity): void
     {
         $this->tripArrivalCity = $tripArrivalCity;
+    }
+
+    public function getBookings(): ?array
+    {
+        return $this->bookings;
+    }
+
+    public function setBookings(array $bookings)
+    {
+        $this->bookings = $bookings;
+
+        return $this;
     }
 
 }

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Entities\User;
 use App\Entities\Car;
 use App\Entities\Add;
+use App\Entities\Booking;
 use DateTime;
 
 class UsersService
@@ -55,6 +56,10 @@ class UsersService
                 // Get adds of this user :
                 $adds = $this->getUserAdds($userDTO['id']);
                 $user->setAdds($adds);
+
+                // Get Bookings of this user :
+                $bookings = $this->getUserBookings($userDTO['id']);
+                $user->setBookings($bookings);
 
                 $users[] = $user;
             }
@@ -113,6 +118,43 @@ class UsersService
         }
 
         return $userCars;
+    }
+
+    
+    /**
+     * Create relation bewteen an user and bookings.
+     */
+    public function setUserBooking(string $userId, string $bookingId): bool
+    {
+        $isOk = false;
+
+        $dataBaseService = new DataBaseService();
+        $isOk = $dataBaseService->setUserBooking($userId, $bookingId);
+
+        return $isOk;
+    }
+
+    /**
+     * Get bookings of given user id.
+     */
+    public function getUserBookings(string $userId): array
+    {
+        $userBookings = [];
+
+        $dataBaseService = new DataBaseService();
+
+        // Get relation users and bookings :
+        $usersBookingsDTO = $dataBaseService->getUserBookings($userId);
+        if (!empty($usersBookingsDTO)) {
+            foreach ($usersBookingsDTO as $userBookingDTO) {
+                $booking = new Booking();
+                $booking->setId($userBookingDTO['id']);
+                $booking->setaddId($userBookingDTO['addId']);
+                $booking->setPassengerId($userBookingDTO['passengerId']);
+                $userBookings[] = $booking;
+            }
+        }   
+        return $userBookings;
     }
 
 
